@@ -11,9 +11,10 @@ import Foundation
 class ToDoItem {
     
     var title : String
+    var history : Array<Any>
     
-    init(inTitle : String){
-        self.title = inTitle
+    init(title : String){
+        self.title = title
+        self.history = []
     }
-    
 }

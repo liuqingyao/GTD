@@ -8,13 +8,15 @@
 
 import UIKit
 
+var sectionTitles = ["YET TO DO", "COMPLETED", "ICEBOX"]
+
+
 class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
-    var objects = [[Any](), [Any]()]
-    var sectionTitles = ["YET TO DO", "COMPLETED"]
+    var objects = sectionTitles.map({_ in return [Any]()})
 
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -40,7 +42,7 @@ class MasterViewController: UITableViewController {
 
     @objc
     func insertNewObject(_ sender: Any) {
-        objects[0].insert(NSDate(), at: 0)
+        objects[0].insert(ToDoItem(title: "To Do Item \(objects[0].count+1)"), at: 0)
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
     }
@@ -50,9 +52,9 @@ class MasterViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let object = objects[0][indexPath.row] as! NSDate
+                let object = objects[0][indexPath.row]
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
+                controller.detailItem = object as! ToDoItem
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
@@ -76,8 +78,8 @@ class MasterViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        let object = objects[0][indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        let object = objects[0][indexPath.row] as! ToDoItem
+        cell.textLabel!.text = object.title
         return cell
     }
 
