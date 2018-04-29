@@ -33,6 +33,7 @@ class MasterViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,7 +53,7 @@ class MasterViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let object = objects[0][indexPath.row]
+                let object = objects[indexPath.section][indexPath.row]
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = object as? ToDoItem
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
@@ -78,7 +79,7 @@ class MasterViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        let object = objects[0][indexPath.row] as! ToDoItem
+        let object = objects[indexPath.section][indexPath.row] as! ToDoItem
         cell.textLabel!.text = object.title
         return cell
     }

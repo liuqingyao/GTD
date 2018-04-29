@@ -12,6 +12,14 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var taskTitle: UITextField!
     
+    @IBAction func taskTitle(_ sender: Any) {
+        if let detail = detailItem {
+            if let label = taskTitle {
+                detail.title = label.text!
+            }
+        }
+    }
+    
 
     func configureView() {
         // Update the user interface for the detail item.
