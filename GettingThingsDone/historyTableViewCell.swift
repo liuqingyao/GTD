@@ -13,11 +13,13 @@ class historyTableViewCell : UITableViewCell {
     @IBOutlet weak var dateField: UILabel!
     @IBOutlet weak var descriptionField: UITextField!
     
-    public func configure(descr: String, inDate: Date) {
-        descriptionField.text = descr
+    func configure(obj : historyItem){
+        descriptionField.text = obj.description
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/M/yyyy, H:mm"
-        dateField.text = dateFormatter.string(from: inDate)
-
+        dateField.text = dateFormatter.string(from: obj.creation)
+        
+        descriptionField.becomeFirstResponder()
     }
 }

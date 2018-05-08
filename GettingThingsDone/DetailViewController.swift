@@ -55,15 +55,25 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         switch indexPath.section{
             case 0:
-                let object = detailItem!.history[indexPath.row] as historyItem
-                print(object.description)
-                print(object.creation)
-                cell.configure(descr: object.description, inDate: object.creation)
+                let obj = detailItem!.history[indexPath.row] as historyItem
+                cell.configure(obj : obj)
             default:
                 fatalError("Wrong Section Enumeration")
         }
                 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Selected row at indexpath: \(indexPath.row)")
+        
+        if(indexPath.section == 1){
+            print("Cell clicked")
+            let cell = tableView.cellForRow(at: indexPath) as! historyTableViewCell
+            print(cell.descriptionField.text!)
+        } else {
+            print(indexPath.section)
+        }
     }
     
 
