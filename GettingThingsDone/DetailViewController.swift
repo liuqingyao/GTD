@@ -10,22 +10,14 @@ import UIKit
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var sectionTitles = ["History", "Collaborators"]
+    var sectionTitles = ["Task", "History", "Collaborators"]
+    var historyItems = [historyItem]()
     
     @IBOutlet weak var historyTableView: UITableView!
-    @IBOutlet weak var taskTitle: UITextField!
-    
-    @IBAction func taskTitle(_ sender: Any) {
-        if let detail = detailItem {
-            if let label = taskTitle {
-                detail.title = label.text!
-            }
-        }
-    }
     
     @IBAction func addButton(_ sender: Any) {
         print("Add Button pressed")
-        let newItem = historyItem(creation: Date(), description: "New Event happened")
+        let newItem = historyItem(creation: Date(), description: "New Event happened", canEdit: true)
         detailItem?.history.append(newItem)
         historyTableView.reloadData()
     }
@@ -41,49 +33,34 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section{
             case 0:
-                return (detailItem?.history.count)!
+                return 1
             case 1:
-                return 0
+                return (detailItem?.history.count)!
             default:
                 return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Loading Cell")
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! historyTableViewCell
         
         switch indexPath.section{
             case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
+                cell.object = detailItem
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! historyTableViewCell
                 let obj = detailItem!.history[indexPath.row] as historyItem
-                cell.configure(obj : obj)
+                cell.object = obj
+                return cell
             default:
                 fatalError("Wrong Section Enumeration")
         }
-                
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected row at indexpath: \(indexPath.row)")
         
-        if(indexPath.section == 1){
-            print("Cell clicked")
-            let cell = tableView.cellForRow(at: indexPath) as! historyTableViewCell
-            print(cell.descriptionField.text!)
-        } else {
-            print(indexPath.section)
-        }
     }
-    
 
     func configureView() {
         // Update the user interface for the detail item.
-        if let detail = detailItem {
-            if let label = taskTitle {
-                label.text = detail.title
-            }
-        }
     }
 
     override func viewDidLoad() {

@@ -106,8 +106,11 @@ class MasterViewController: UITableViewController {
         objects[destinationIndexPath.section].insert(objects[sourceIndexPath.section][sourceIndexPath.row], at: destinationIndexPath.row)
         objects[sourceIndexPath.section].remove(at: sourceIndexPath.row)
         
+        //save change
         let obj = objects[destinationIndexPath.section][destinationIndexPath.row] as! ToDoItem
-        obj.addMoveEvent(section : sectionTitles[destinationIndexPath.section])
+        if(destinationIndexPath.section != sourceIndexPath.section){
+            obj.addMoveEvent(section : sectionTitles[destinationIndexPath.section])
+        }
         
     }
 

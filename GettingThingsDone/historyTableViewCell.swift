@@ -8,10 +8,31 @@
 
 import UIKit
 
-class historyTableViewCell : UITableViewCell {
+class historyTableViewCell : UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet weak var dateField: UILabel!
     @IBOutlet weak var descriptionField: UITextField!
+    
+    var object : historyItem? {
+        didSet {
+            configure(obj : object!)
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("Should Return")
+        if let inText = textField.text {
+            if let oj = object {
+                oj.description = inText
+            }
+        }
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    @IBAction func changeAction(_ sender: Any) {
+        object?.description = descriptionField.text!
+    }
     
     func configure(obj : historyItem){
         descriptionField.text = obj.description
@@ -20,6 +41,10 @@ class historyTableViewCell : UITableViewCell {
         dateFormatter.dateFormat = "dd/M/yyyy, H:mm"
         dateField.text = dateFormatter.string(from: obj.creation)
         
-        descriptionField.becomeFirstResponder()
+        if(!obj.editable){
+            descriptionField.isUserInteractionEnabled = false
+        }
+        
+        descriptionField.delegate = self
     }
 }

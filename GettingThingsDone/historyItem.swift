@@ -12,10 +12,12 @@ class historyItem {
     
     var creation : Date
     var description : String
+    var editable : Bool
     
-    init(creation : Date, description : String){
+    init(creation : Date, description : String, canEdit : Bool){
         self.creation = creation
         self.description = description
+        self.editable = canEdit
     }
     
 }

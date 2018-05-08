@@ -35,61 +35,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TASK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kir-m4-Ofz">
-                                <rect key="frame" x="16" y="118.5" width="41.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="highlightedColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Nb5-wW-qjw">
-                                <rect key="frame" x="0.0" y="147" width="25" height="39"/>
-                            </stackView>
-                            <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="5vT-0A-Obn">
-                                <rect key="frame" x="0.0" y="147" width="375" height="39"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="466-CF-krB"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="taskTitle:" destination="JEX-9P-axG" eventType="editingDidEnd" id="wVQ-d5-php"/>
-                                </connections>
-                            </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3eA-Ys-x76">
-                                <rect key="frame" x="0.0" y="194" width="375" height="429"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="567"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H37-sM-RfM">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="429"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="567"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="V69-Zc-L1L" customClass="historyTableViewCell" customModule="GettingThingsDone" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="72" id="V69-Zc-L1L" customClass="historyTableViewCell" customModule="GettingThingsDone" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="72"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V69-Zc-L1L" id="lf3-Ls-sFw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="dateLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QL4-dF-SrO">
-                                                            <rect key="frame" x="15" y="-6" width="123" height="50"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dateLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QL4-dF-SrO">
+                                                            <rect key="frame" x="14" y="0.0" width="123" height="72"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="123" id="oSd-KW-vhH"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OHV-Io-uew">
-                                                            <rect key="frame" x="152" y="-6" width="214" height="50"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OHV-Io-uew">
+                                                            <rect key="frame" x="146" y="0.0" width="220" height="72"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                            <connections>
+                                                                <action selector="changeAction:" destination="V69-Zc-L1L" eventType="editingDidEnd" id="YpE-QB-omO"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="OHV-Io-uew" secondAttribute="trailing" constant="-6" id="Hre-va-WBi"/>
+                                                        <constraint firstItem="OHV-Io-uew" firstAttribute="leading" secondItem="QL4-dF-SrO" secondAttribute="trailing" constant="9" id="SD1-Kt-pWY"/>
+                                                        <constraint firstItem="QL4-dF-SrO" firstAttribute="bottom" secondItem="OHV-Io-uew" secondAttribute="bottom" id="bMQ-Zj-Q54"/>
+                                                        <constraint firstItem="QL4-dF-SrO" firstAttribute="leading" secondItem="lf3-Ls-sFw" secondAttribute="leadingMargin" constant="-1" id="hxI-sG-awp"/>
+                                                        <constraint firstItem="QL4-dF-SrO" firstAttribute="top" secondItem="OHV-Io-uew" secondAttribute="top" id="rfE-5B-Wep"/>
+                                                        <constraint firstItem="QL4-dF-SrO" firstAttribute="top" secondItem="lf3-Ls-sFw" secondAttribute="topMargin" constant="-11" id="tRA-BC-BOv"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="QL4-dF-SrO" secondAttribute="bottom" constant="-11" id="uDR-N9-Glw"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="dateField" destination="QL4-dF-SrO" id="5Io-JD-cDv"/>
+                                                    <outlet property="descriptionField" destination="OHV-Io-uew" id="m98-yR-7D1"/>
+                                                </connections>
+                                            </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="taskCell" rowHeight="74" id="AOO-AD-AV8" customClass="TaskCell" customModule="GettingThingsDone" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="100" width="375" height="74"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AOO-AD-AV8" id="HHX-dC-Hmh">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="73.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <textField opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mEv-3l-10L">
+                                                            <rect key="frame" x="15" y="11" width="351" height="52"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="mEv-3l-10L" firstAttribute="leading" secondItem="HHX-dC-Hmh" secondAttribute="leadingMargin" constant="-1" id="4rf-M4-68g"/>
+                                                        <constraint firstItem="mEv-3l-10L" firstAttribute="bottom" secondItem="HHX-dC-Hmh" secondAttribute="bottomMargin" id="WzB-h3-Fpg"/>
+                                                        <constraint firstItem="mEv-3l-10L" firstAttribute="top" secondItem="HHX-dC-Hmh" secondAttribute="topMargin" id="c4A-f7-fl3"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="mEv-3l-10L" secondAttribute="trailing" constant="-7" id="n4i-fl-6JD"/>
+                                                    </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="dateField" destination="QL4-dF-SrO" id="5Io-JD-cDv"/>
-                                                    <outlet property="descriptionField" destination="OHV-Io-uew" id="m98-yR-7D1"/>
+                                                    <outlet property="taskField" destination="mEv-3l-10L" id="Zxz-ac-eZO"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -99,19 +115,10 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="Nb5-wW-qjw" secondAttribute="trailing" constant="350" id="2Zc-35-1hI"/>
-                            <constraint firstItem="5vT-0A-Obn" firstAttribute="top" secondItem="svH-Pt-448" secondAttribute="top" constant="147" id="2hB-a7-2jg"/>
-                            <constraint firstItem="5vT-0A-Obn" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="3ec-P0-Skv"/>
-                            <constraint firstItem="5vT-0A-Obn" firstAttribute="top" secondItem="kir-m4-Ofz" secondAttribute="bottom" constant="8" symbolic="YES" id="453-bv-gbr"/>
-                            <constraint firstAttribute="trailing" secondItem="5vT-0A-Obn" secondAttribute="trailing" id="7RJ-pM-oKA"/>
-                            <constraint firstItem="5vT-0A-Obn" firstAttribute="bottom" secondItem="Nb5-wW-qjw" secondAttribute="bottom" id="9Fe-Qq-8MZ"/>
-                            <constraint firstItem="5vT-0A-Obn" firstAttribute="trailing" secondItem="3eA-Ys-x76" secondAttribute="trailing" id="E3W-0n-izz"/>
-                            <constraint firstItem="3eA-Ys-x76" firstAttribute="bottom" secondItem="VUw-jc-0yf" secondAttribute="bottom" id="H4n-xc-1le"/>
-                            <constraint firstItem="3eA-Ys-x76" firstAttribute="top" secondItem="5vT-0A-Obn" secondAttribute="bottom" constant="8" symbolic="YES" id="QeZ-6u-gP5"/>
-                            <constraint firstItem="kir-m4-Ofz" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="aiF-xr-czu"/>
-                            <constraint firstItem="5vT-0A-Obn" firstAttribute="leading" secondItem="3eA-Ys-x76" secondAttribute="leading" id="g3f-fH-uo1"/>
-                            <constraint firstItem="5vT-0A-Obn" firstAttribute="leading" secondItem="Nb5-wW-qjw" secondAttribute="leading" id="gMQ-c1-rG7"/>
-                            <constraint firstItem="5vT-0A-Obn" firstAttribute="top" secondItem="Nb5-wW-qjw" secondAttribute="top" id="ynt-AB-4Js"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="3eA-Ys-x76" secondAttribute="bottom" constant="-8" id="aLw-RG-qSc"/>
+                            <constraint firstItem="3eA-Ys-x76" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="e6p-gZ-eLb"/>
+                            <constraint firstItem="3eA-Ys-x76" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" id="jOk-RH-ZIO"/>
+                            <constraint firstAttribute="trailing" secondItem="3eA-Ys-x76" secondAttribute="trailing" id="lWJ-yl-lGS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>
@@ -126,7 +133,6 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="historyTableView" destination="H37-sM-RfM" id="qaM-rH-Idi"/>
-                        <outlet property="taskTitle" destination="5vT-0A-Obn" id="AVS-8b-6o2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>

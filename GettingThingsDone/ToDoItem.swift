@@ -16,11 +16,11 @@ class ToDoItem {
     init(title : String){
         self.title = title
         self.history = []
-        history.append(historyItem(creation: Date(), description: "Added Item"))
+        history.append(historyItem(creation: Date(), description: "Added Item", canEdit: false))
     }
     
     public func addMoveEvent(section : String){
-        history.insert(historyItem(creation: Date(), description: "Moved Item to \(section)"), at: 0)
+        history.insert(historyItem(creation: Date(), description: "Moved Item to \(section)", canEdit : false), at: 0)
     }
 }
 
