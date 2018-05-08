@@ -8,8 +8,9 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var taskTitle: UITextField!
     
     @IBAction func taskTitle(_ sender: Any) {
@@ -18,6 +19,18 @@ class DetailViewController: UIViewController {
                 detail.title = label.text!
             }
         }
+    }
+    
+    @IBAction func addButton(_ sender: Any) {
+    
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
     }
     
 
@@ -33,7 +46,9 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        historyTableView.delegate = self
         configureView()
+        
     }
 
     override func didReceiveMemoryWarning() {
