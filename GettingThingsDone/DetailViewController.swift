@@ -10,6 +10,8 @@ import UIKit
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    var sectionTitles = ["History", "Collaborators"]
+    
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var taskTitle: UITextField!
     
@@ -22,15 +24,46 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     @IBAction func addButton(_ sender: Any) {
+        print("Add Button pressed")
+        let newItem = historyItem(creation: Date(), description: "New Event happened")
+        detailItem?.history.append(newItem)
+        historyTableView.reloadData()
+    }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionTitles.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitles[section]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
+        switch section{
+            case 0:
+                return (detailItem?.history.count)!
+            case 1:
+                return 0
+            default:
+                return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        print("Loading Cell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! historyTableViewCell
+        
+        switch indexPath.section{
+            case 0:
+                let object = detailItem!.history[indexPath.row] as historyItem
+                print(object.description)
+                print(object.creation)
+                cell.configure(descr: object.description, inDate: object.creation)
+            default:
+                fatalError("Wrong Section Enumeration")
+        }
+                
+        return cell
     }
     
 
@@ -47,6 +80,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         historyTableView.delegate = self
+        historyTableView.dataSource = self
         configureView()
         
     }

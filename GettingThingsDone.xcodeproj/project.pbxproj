@@ -17,6 +17,7 @@
 		84057DBE2095953E00025048 /* GettingThingsDoneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84057DBD2095953E00025048 /* GettingThingsDoneUITests.swift */; };
 		84057DCC209597E700025048 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84057DCB209597E700025048 /* ToDoItem.swift */; };
 		84691A6120A156C700282A17 /* historyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84691A6020A156C700282A17 /* historyItem.swift */; };
+		84691A6320A1621300282A17 /* historyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84691A6220A1621300282A17 /* historyTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		84057DBF2095953E00025048 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84057DCB209597E700025048 /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		84691A6020A156C700282A17 /* historyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = historyItem.swift; sourceTree = "<group>"; };
+		84691A6220A1621300282A17 /* historyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = historyTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				84057DA62095953E00025048 /* LaunchScreen.storyboard */,
 				84057DA92095953E00025048 /* Info.plist */,
 				84057DCB209597E700025048 /* ToDoItem.swift */,
+				84691A6220A1621300282A17 /* historyTableViewCell.swift */,
 			);
 			path = GettingThingsDone;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				84057D9E2095953E00025048 /* MasterViewController.swift in Sources */,
 				84057DCC209597E700025048 /* ToDoItem.swift in Sources */,
 				84691A6120A156C700282A17 /* historyItem.swift in Sources */,
+				84691A6320A1621300282A17 /* historyTableViewCell.swift in Sources */,
 				84057D9C2095953E00025048 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
