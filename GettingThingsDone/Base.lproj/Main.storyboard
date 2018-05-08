@@ -50,16 +50,16 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dateLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QL4-dF-SrO">
-                                                            <rect key="frame" x="14" y="0.0" width="123" height="72"/>
+                                                            <rect key="frame" x="12" y="0.0" width="123" height="72"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="123" id="oSd-KW-vhH"/>
+                                                                <constraint firstAttribute="width" constant="123" id="eto-Qm-wzS"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OHV-Io-uew">
-                                                            <rect key="frame" x="146" y="0.0" width="220" height="72"/>
+                                                            <rect key="frame" x="144" y="0.0" width="8" height="72"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
@@ -69,13 +69,12 @@
                                                         </textField>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="OHV-Io-uew" secondAttribute="trailing" constant="-6" id="Hre-va-WBi"/>
-                                                        <constraint firstItem="OHV-Io-uew" firstAttribute="leading" secondItem="QL4-dF-SrO" secondAttribute="trailing" constant="9" id="SD1-Kt-pWY"/>
-                                                        <constraint firstItem="QL4-dF-SrO" firstAttribute="bottom" secondItem="OHV-Io-uew" secondAttribute="bottom" id="bMQ-Zj-Q54"/>
-                                                        <constraint firstItem="QL4-dF-SrO" firstAttribute="leading" secondItem="lf3-Ls-sFw" secondAttribute="leadingMargin" constant="-1" id="hxI-sG-awp"/>
-                                                        <constraint firstItem="QL4-dF-SrO" firstAttribute="top" secondItem="OHV-Io-uew" secondAttribute="top" id="rfE-5B-Wep"/>
-                                                        <constraint firstItem="QL4-dF-SrO" firstAttribute="top" secondItem="lf3-Ls-sFw" secondAttribute="topMargin" constant="-11" id="tRA-BC-BOv"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="QL4-dF-SrO" secondAttribute="bottom" constant="-11" id="uDR-N9-Glw"/>
+                                                        <constraint firstItem="QL4-dF-SrO" firstAttribute="centerY" secondItem="lf3-Ls-sFw" secondAttribute="centerY" id="TPl-Xb-GsZ"/>
+                                                        <constraint firstItem="QL4-dF-SrO" firstAttribute="bottom" secondItem="OHV-Io-uew" secondAttribute="bottom" id="VnU-gg-seW"/>
+                                                        <constraint firstItem="QL4-dF-SrO" firstAttribute="leading" secondItem="lf3-Ls-sFw" secondAttribute="leadingMargin" constant="-3" id="XlZ-R2-Zbf"/>
+                                                        <constraint firstItem="QL4-dF-SrO" firstAttribute="top" secondItem="OHV-Io-uew" secondAttribute="top" id="bey-h8-267"/>
+                                                        <constraint firstItem="OHV-Io-uew" firstAttribute="leading" secondItem="QL4-dF-SrO" secondAttribute="trailing" constant="9" id="dXo-lx-rlD"/>
+                                                        <constraint firstItem="QL4-dF-SrO" firstAttribute="top" secondItem="lf3-Ls-sFw" secondAttribute="top" id="zEE-8l-Max"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
@@ -98,10 +97,10 @@
                                                         </textField>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="mEv-3l-10L" firstAttribute="leading" secondItem="HHX-dC-Hmh" secondAttribute="leadingMargin" constant="-1" id="4rf-M4-68g"/>
-                                                        <constraint firstItem="mEv-3l-10L" firstAttribute="bottom" secondItem="HHX-dC-Hmh" secondAttribute="bottomMargin" id="WzB-h3-Fpg"/>
-                                                        <constraint firstItem="mEv-3l-10L" firstAttribute="top" secondItem="HHX-dC-Hmh" secondAttribute="topMargin" id="c4A-f7-fl3"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="mEv-3l-10L" secondAttribute="trailing" constant="-7" id="n4i-fl-6JD"/>
+                                                        <constraint firstItem="mEv-3l-10L" firstAttribute="top" secondItem="HHX-dC-Hmh" secondAttribute="topMargin" id="MuS-Rm-qmJ"/>
+                                                        <constraint firstItem="mEv-3l-10L" firstAttribute="leading" secondItem="HHX-dC-Hmh" secondAttribute="leadingMargin" constant="-1" id="eOC-qt-lxc"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="mEv-3l-10L" secondAttribute="trailing" constant="-7" id="gIG-70-g3b"/>
+                                                        <constraint firstItem="mEv-3l-10L" firstAttribute="bottom" secondItem="HHX-dC-Hmh" secondAttribute="bottomMargin" id="mU9-3C-1l7"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
