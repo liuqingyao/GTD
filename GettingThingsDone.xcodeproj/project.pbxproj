@@ -36,6 +36,13 @@
 			remoteGlobalIDString = 84057D972095953E00025048;
 			remoteInfo = GettingThingsDone;
 		};
+		8459E93B20A2BAD300BA1E3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84057D902095953E00025048 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84057D972095953E00025048;
+			remoteInfo = GettingThingsDone;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +62,7 @@
 		84057DBF2095953E00025048 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84057DCB209597E700025048 /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		841EEA6620A1AFAA00D1A295 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		8459E93620A2BAD300BA1E3C /* GettingThingsDoneTestsa.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GettingThingsDoneTestsa.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84691A6020A156C700282A17 /* historyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = historyItem.swift; sourceTree = "<group>"; };
 		84691A6220A1621300282A17 /* historyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = historyTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +89,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8459E93320A2BAD300BA1E3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -100,6 +115,7 @@
 				84057D982095953E00025048 /* GettingThingsDone.app */,
 				84057DAE2095953E00025048 /* GettingThingsDoneTests.xctest */,
 				84057DB92095953E00025048 /* GettingThingsDoneUITests.xctest */,
+				8459E93620A2BAD300BA1E3C /* GettingThingsDoneTestsa.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -196,6 +212,24 @@
 			productReference = 84057DB92095953E00025048 /* GettingThingsDoneUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		8459E93520A2BAD300BA1E3C /* GettingThingsDoneTestsa */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8459E93F20A2BAD300BA1E3C /* Build configuration list for PBXNativeTarget "GettingThingsDoneTestsa" */;
+			buildPhases = (
+				8459E93220A2BAD300BA1E3C /* Sources */,
+				8459E93320A2BAD300BA1E3C /* Frameworks */,
+				8459E93420A2BAD300BA1E3C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8459E93C20A2BAD300BA1E3C /* PBXTargetDependency */,
+			);
+			name = GettingThingsDoneTestsa;
+			productName = GettingThingsDoneTestsa;
+			productReference = 8459E93620A2BAD300BA1E3C /* GettingThingsDoneTestsa.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -220,6 +254,11 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 84057D972095953E00025048;
 					};
+					8459E93520A2BAD300BA1E3C = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 84057D972095953E00025048;
+					};
 				};
 			};
 			buildConfigurationList = 84057D932095953E00025048 /* Build configuration list for PBXProject "GettingThingsDone" */;
@@ -238,6 +277,7 @@
 				84057D972095953E00025048 /* GettingThingsDone */,
 				84057DAD2095953E00025048 /* GettingThingsDoneTests */,
 				84057DB82095953E00025048 /* GettingThingsDoneUITests */,
+				8459E93520A2BAD300BA1E3C /* GettingThingsDoneTestsa */,
 			);
 		};
 /* End PBXProject section */
@@ -261,6 +301,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		84057DB72095953E00025048 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8459E93420A2BAD300BA1E3C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -300,6 +347,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8459E93220A2BAD300BA1E3C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -312,6 +366,11 @@
 			isa = PBXTargetDependency;
 			target = 84057D972095953E00025048 /* GettingThingsDone */;
 			targetProxy = 84057DBA2095953E00025048 /* PBXContainerItemProxy */;
+		};
+		8459E93C20A2BAD300BA1E3C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84057D972095953E00025048 /* GettingThingsDone */;
+			targetProxy = 8459E93B20A2BAD300BA1E3C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -532,6 +591,36 @@
 			};
 			name = Release;
 		};
+		8459E93D20A2BAD300BA1E3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = GettingThingsDoneTestsa/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.edu.griffith.ict.prog.GettingThingsDone.GettingThingsDoneTestsa;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GettingThingsDone.app/GettingThingsDone";
+			};
+			name = Debug;
+		};
+		8459E93E20A2BAD300BA1E3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = GettingThingsDoneTestsa/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.edu.griffith.ict.prog.GettingThingsDone.GettingThingsDoneTestsa;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GettingThingsDone.app/GettingThingsDone";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -567,6 +656,15 @@
 			buildConfigurations = (
 				84057DC92095953E00025048 /* Debug */,
 				84057DCA2095953E00025048 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8459E93F20A2BAD300BA1E3C /* Build configuration list for PBXNativeTarget "GettingThingsDoneTestsa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8459E93D20A2BAD300BA1E3C /* Debug */,
+				8459E93E20A2BAD300BA1E3C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

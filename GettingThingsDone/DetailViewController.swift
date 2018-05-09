@@ -11,14 +11,13 @@ import UIKit
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var sectionTitles = ["Task", "History", "Collaborators"]
-    var historyItems = [historyItem]()
     
     @IBOutlet weak var historyTableView: UITableView!
     
     @IBAction func addButton(_ sender: Any) {
         print("Add Button pressed")
         let newItem = historyItem(creation: Date(), description: "New Event happened", canEdit: true)
-        detailItem?.history.append(newItem)
+        detailItem?.history.insert(newItem, at:0)
         historyTableView.reloadData()
     }
     
@@ -42,7 +41,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         switch indexPath.section{
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
@@ -56,20 +54,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             default:
                 fatalError("Wrong Section Enumeration")
         }
-        
     }
 
-    func configureView() {
-        // Update the user interface for the detail item.
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         historyTableView.delegate = self
         historyTableView.dataSource = self
-        configureView()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,11 +71,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
 
     var detailItem: ToDoItem? {
         didSet {
-            // Update the view.
-            configureView()
         }
     }
-
 
 }
 

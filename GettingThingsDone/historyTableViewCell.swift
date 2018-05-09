@@ -43,6 +43,8 @@ class historyTableViewCell : UITableViewCell, UITextFieldDelegate {
         
         if(!obj.editable){
             descriptionField.isUserInteractionEnabled = false
+        } else {
+            descriptionField.isUserInteractionEnabled = true
         }
         
         descriptionField.delegate = self

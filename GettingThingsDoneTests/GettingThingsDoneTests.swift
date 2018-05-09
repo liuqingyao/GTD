@@ -11,26 +11,34 @@ import XCTest
 
 class GettingThingsDoneTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testToDoItem() {
+        let item = ToDoItem(title : "Test")
+        XCTAssertEqual(item.title, "Test" )
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testMoveHistoryItem(){
+        let item = ToDoItem(title : "Testhistory")
+        item.addMoveEvent(section: "testsection")
+        XCTAssertEqual(item.history[0].description, "Moved Item to testsection")
+        XCTAssertFalse(item.history[0].editable)
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testRenameHistoryItem(){
+        let item = ToDoItem(title : "First title")
+        item.changeTitle(nTitle: "Second Title")
+        XCTAssertEqual(item.history[0].description, "Changed Item name from First title to Second Title")
+        XCTAssertFalse(item.history[0].editable)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testAddItem(){
+        let item = ToDoItem(title : "Another Title")
+        let date = Date()
+        item.history.insert(historyItem(creation : date, description : "Testdescription", canEdit: true), at : 0)
+        XCTAssertTrue(item.history[0].editable)
+        XCTAssertEqual(item.history[0].description, "Testdescription")
+        XCTAssertEqual(item.history[0].creation, date)
     }
+    
     
 }
+
