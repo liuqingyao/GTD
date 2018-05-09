@@ -23,7 +23,7 @@ class TaskCell : UITableViewCell, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let inText = textField.text {
             if let oj = object {
-                oj.title = inText
+                oj.changeTitle(nTitle: inText)
             }
         }
         textField.resignFirstResponder()
