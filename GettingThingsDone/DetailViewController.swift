@@ -14,9 +14,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var historyTableView: UITableView!
     
+    /**
+     Add button function which inserts a new historyitem to the objects history Array
+    */
     @IBAction func addButton(_ sender: Any) {
         print("Add Button pressed")
-        let newItem = historyItem(creation: Date(), description: "New Event happened", canEdit: true)
+        let newItem = historyItem(creation: Date(), descr: "New Event", canEdit: true)
         detailItem?.history.insert(newItem, at:0)
         historyTableView.reloadData()
     }
@@ -30,6 +33,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //Section switch statement, which returns the number of rows per section
         switch section{
             case 0:
                 return 1
@@ -40,6 +44,13 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+    /**
+     Cell for row at function which returns a cell depening on the section
+     - section 0 : Task cell is returned
+     - section 1 : History Item Cell is returned
+     - section 2 : Collaborators Cell is returend
+     - default: Fatal Error, due to not existing section
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section{
             case 0:

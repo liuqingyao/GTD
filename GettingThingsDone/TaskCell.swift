@@ -8,6 +8,10 @@
 
 import UIKit
 
+/**
+ Custom Cell for task item, which accepts a ToDoItem Object and sets the text
+ */
+
 class TaskCell : UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet weak var taskField: UITextField!
@@ -20,6 +24,11 @@ class TaskCell : UITableViewCell, UITextFieldDelegate {
         }
     }
     
+    /**
+     TextfieldShouldReturn Function which is called when return button pressed.
+     The objects changeTitle function is called, which updates the objects title
+     - returns: Boolean
+     */
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let inText = textField.text {
             if let oj = object {

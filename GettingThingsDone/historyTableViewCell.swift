@@ -8,6 +8,9 @@
 
 import UIKit
 
+/**
+ Custom historyTableView cell to display the date and description of a history Item
+ */
 class historyTableViewCell : UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet weak var dateField: UILabel!
@@ -18,24 +21,28 @@ class historyTableViewCell : UITableViewCell, UITextFieldDelegate {
             configure(obj : object!)
         }
     }
-    
+
+    /**
+    Return Function to save new input and to resign first responder
+     - returns: Boolean
+     */
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("Should Return")
         if let inText = textField.text {
             if let oj = object {
-                oj.description = inText
+                oj.descr = inText
             }
         }
         textField.resignFirstResponder()
         return true
     }
     
-    @IBAction func changeAction(_ sender: Any) {
-        object?.description = descriptionField.text!
-    }
-    
+    /**
+     Configuration function for custom cell, which sets the date and also sets wether
+     - parameter obj : HistoryItem
+     */
     func configure(obj : historyItem){
-        descriptionField.text = obj.description
+        descriptionField.text = obj.descr
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/M/yyyy, H:mm"
