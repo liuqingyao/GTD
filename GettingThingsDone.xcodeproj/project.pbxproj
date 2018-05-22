@@ -19,6 +19,7 @@
 		841EEA6720A1AFAA00D1A295 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EEA6620A1AFAA00D1A295 /* TaskCell.swift */; };
 		84691A6120A156C700282A17 /* historyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84691A6020A156C700282A17 /* historyItem.swift */; };
 		84691A6320A1621300282A17 /* historyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84691A6220A1621300282A17 /* historyTableViewCell.swift */; };
+		84D474F820B3DCF600AE2F44 /* PeerToPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D474F720B3DCF600AE2F44 /* PeerToPeer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		8459E93620A2BAD300BA1E3C /* GettingThingsDoneTestsa.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GettingThingsDoneTestsa.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84691A6020A156C700282A17 /* historyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = historyItem.swift; sourceTree = "<group>"; };
 		84691A6220A1621300282A17 /* historyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = historyTableViewCell.swift; sourceTree = "<group>"; };
+		84D474F720B3DCF600AE2F44 /* PeerToPeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerToPeer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 				84057DA92095953E00025048 /* Info.plist */,
 				84057DCB209597E700025048 /* ToDoItem.swift */,
 				84691A6220A1621300282A17 /* historyTableViewCell.swift */,
+				84D474F720B3DCF600AE2F44 /* PeerToPeer.swift */,
 			);
 			path = GettingThingsDone;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				84057DCC209597E700025048 /* ToDoItem.swift in Sources */,
 				84691A6120A156C700282A17 /* historyItem.swift in Sources */,
 				84691A6320A1621300282A17 /* historyTableViewCell.swift in Sources */,
+				84D474F820B3DCF600AE2F44 /* PeerToPeer.swift in Sources */,
 				84057D9C2095953E00025048 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

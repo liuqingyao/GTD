@@ -9,6 +9,7 @@
 import UIKit
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
 
     var sectionTitles = ["Task", "History", "Collaborators"]
     
