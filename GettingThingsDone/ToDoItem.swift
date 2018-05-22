@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MultipeerConnectivity
 
 /**
  To Do item Class to store information about a ToDoItem (title and historyArray)
@@ -15,10 +16,12 @@ import Foundation
     
     dynamic var title : String
     dynamic var history : Array<historyItem>
+    dynamic var collaborators : Array<MCPeerID>
     
     init(title : String){
         self.title = title
         self.history = []
+        self.collaborators = []
         history.append(historyItem(creation: Date(), descr: "Added Item", canEdit: false))
     }
 }
@@ -44,6 +47,11 @@ extension ToDoItem {
             history.insert(historyItem(creation: Date(), descr: "Changed Item name from \(self.title) to \(nTitle)", canEdit: false), at: 0)
             self.title = nTitle
         }
+    }
+    
+    public func addCollaborator(collab: MCPeerID){
+        history.insert(historyItem(creation: Date(), descr: "Added collaborator: \(collab.displayName)", canEdit: false), at: 0)
+        collaborators.append(collab)
     }
     
 }

@@ -108,6 +108,26 @@
                                                     <outlet property="taskField" destination="mEv-3l-10L" id="Zxz-ac-eZO"/>
                                                 </connections>
                                             </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" reuseIdentifier="collabCell" textLabel="Tvy-1b-XYs" rowHeight="67" style="IBUITableViewCellStyleDefault" id="ZdI-e4-HO3">
+                                                <rect key="frame" x="0.0" y="162" width="375" height="67"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZdI-e4-HO3" id="N81-8h-5YM">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="66.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tvy-1b-XYs">
+                                                            <rect key="frame" x="15" y="0.0" width="345" height="66.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <bool key="isElement" value="YES"/>
+                                                </accessibility>
+                                            </tableViewCell>
                                         </prototypes>
                                     </tableView>
                                 </subviews>

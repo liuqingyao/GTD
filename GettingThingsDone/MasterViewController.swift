@@ -12,16 +12,17 @@ var sectionTitles = ["YET TO DO", "COMPLETED", "ICEBOX"]
 
 
 class MasterViewController: UITableViewController, PeerToPeerDelegate {
+    
+    
+    func manager(_ manager: PeerToPeer, didReceive data: Data) {
+        print("Received data!")
+    }
+    
 
     var detailViewController: DetailViewController? = nil
     var objects = sectionTitles.map({_ in return [Any]()})
     
-    var peerToPeer = PeerToPeer()
-    func manager(_ manager: PeerToPeer, didReceive data: Data) {
-        //do something with the data received
-        print("Received data")
-    }
-
+    var ptp : PeerToPeer?
     
     
     override func viewDidLoad() {
@@ -36,8 +37,7 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
         
-        //Peer to Peer
-        peerToPeer.delegate = self
+        ptp = PeerToPeer()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +68,7 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
                 controller.detailItem = object as? ToDoItem
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
+                controller.ptp = self.ptp
             }
         }
     }

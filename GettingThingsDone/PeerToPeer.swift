@@ -11,7 +11,6 @@ import MultipeerConnectivity
 
 protocol PeerToPeerDelegate : AnyObject {
     func manager(_ manager : PeerToPeer, didReceive data: Data)
-    func newpeer(peerId : MCPeerID)
 }
 
 class PeerToPeer : NSObject {
@@ -82,7 +81,6 @@ extension PeerToPeer: MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         print("foundPeer: \(peerID) - \(info?.description ?? "<no info>")")
         invite(peer: peerID)
-        delegate?.newpeer(peerId: peerID)
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {

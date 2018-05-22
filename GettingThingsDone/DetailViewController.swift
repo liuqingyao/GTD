@@ -10,8 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-
-    var sectionTitles = ["Task", "History", "Collaborators"]
+    var sectionTitles = ["Task", "History", "Collaborators", "Peers"]
     
     @IBOutlet weak var historyTableView: UITableView!
     
@@ -40,8 +39,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 return 1
             case 1:
                 return (detailItem?.history.count)!
+            case 2:
+                return (detailItem?.collaborators.count)!
+            case 3:
+                return ptp!.peerList.count
             default:
-                return 0
+                fatalError("Out of section bound")
         }
     }
     
@@ -63,8 +66,31 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 let obj = detailItem!.history[indexPath.row] as historyItem
                 cell.object = obj
                 return cell
+            case 2:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "collabCell", for: indexPath)
+                cell.textLabel!.text = ptp?.peerList[indexPath.row].displayName
+                return cell
+            case 3:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "collabCell", for: indexPath)
+                cell.textLabel!.text = ptp?.peerList[indexPath.row].displayName
+                return cell
             default:
                 fatalError("Wrong Section Enumeration")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(indexPath.section == 3){
+            let index = detailItem?.collaborators.index(of: (ptp?.peerList[indexPath.row])!)
+            if(index == nil){
+                detailItem?.addCollaborator(collab: (ptp?.peerList[indexPath.row])!)
+                tableView.reloadData()
+                
+                let messageDictionary: [String: String] = ["message": "Added you to collaborate!"]
+                
+                let dta = NSKeyedArchiver.archivedData(withRootObject: messageDictionary)
+                ptp?.send(data: dta)
+            }
         }
     }
 
@@ -85,6 +111,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         didSet {
         }
     }
+    
+    var ptp : PeerToPeer?
 
 }
 
