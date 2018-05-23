@@ -49,6 +49,9 @@ class PeerToPeer : NSObject {
         serviceBrowser.invitePeer(peer, to: session, withContext: nil, timeout: t)
         //Add peer to peers array
         peerList.append(peer)
+        
+        let center = NotificationCenter.default
+        center.post(name: NSNotification.Name(rawValue: "NewPeer"), object: nil)
     }
     
     func send(data: Data) {
@@ -100,6 +103,8 @@ extension PeerToPeer: MCNearbyServiceBrowserDelegate {
             peerList.remove(at: index)
             print("Removed lost peer from peer list")
         }
+        let center = NotificationCenter.default
+        center.post(name: NSNotification.Name(rawValue: "LostPeer"), object: peerID)
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -68,7 +69,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 return cell
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "collabCell", for: indexPath)
-                cell.textLabel!.text = ptp?.peerList[indexPath.row].displayName
+                cell.textLabel!.text = detailItem!.collaborators[indexPath.row].displayName
                 return cell
             case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "collabCell", for: indexPath)
@@ -83,7 +84,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         if(indexPath.section == 3){
             let index = detailItem?.collaborators.index(of: (ptp?.peerList[indexPath.row])!)
             if(index == nil){
-                var collab = ptp?.peerList[indexPath.row]
+                let collab = ptp?.peerList[indexPath.row]
                 detailItem?.addCollaborator(collab: collab!)
                 tableView.reloadData()
     
@@ -99,6 +100,28 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         // Do any additional setup after loading the view, typically from a nib.
         historyTableView.delegate = self
         historyTableView.dataSource = self
+        
+        //Notification Center
+        let center = NotificationCenter.default
+        center.addObserver(forName: NSNotification.Name(rawValue: "NewPeer"), object: nil, queue: nil){_ in
+            print("New peer - reloading peer section. Count:")
+            print(self.ptp!.peerList.count)
+            self.historyTableView.reloadData()
+        }
+        center.addObserver(forName: NSNotification.Name(rawValue: "LostPeer"), object: MCPeerID(), queue: nil){_ in
+            print("Lost peer - reloading peer section. Count:")
+            print(self.ptp!.peerList.count)
+            
+            //remove peer from todoitem
+            if let oj = object {
+                if let index = detailItem?.collaborators.index(oj){
+                    detailItem?.collaborators.remove(at: index)
+                    print("Removed lost peer from Detailitem")
+                }
+            }
+            
+            self.historyTableView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,6 +135,5 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     var ptp : PeerToPeer?
-
 }
 

@@ -16,22 +16,30 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
     func ptpmanager(_ manager: PeerToPeer, didReceive data: Data) {
         print("Running manager..")
         let item = (NSKeyedUnarchiver.unarchiveObject(with: data) as? ToDoItem)!
-        print("New item receive! \(item.id!)")
+        var idx : IndexPath?
         
-        let index = objects.index(where: { (item) -> Bool in
-            item.id == item.id! //
-        })
-        if(index != nil){
-            print("Object already exist")
+        for s in 0..<objects.count{
+            for r in 0..<objects[s].count{
+                if(objects[s][r].id == item.id){
+                    idx = IndexPath(row: r, section: s)
+                }
+            }
+        }
+        
+        if let index = idx{
+            print("Updating object \(item.id)")
+            objects[index.section][index.row] = item
         } else {
+            print("New item received and added with id: \(item.id!)")
             objects[0].insert(item, at:0)
             tableView.reloadData()
         }
+        
     }
 
     var ptp : PeerToPeer?
     var detailViewController: DetailViewController? = nil
-    var objects = sectionTitles.map({_ in return [Any]()})
+    var objects = sectionTitles.map({_ in return [ToDoItem]()})
     
     
     override func viewDidLoad() {
