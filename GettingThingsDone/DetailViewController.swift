@@ -83,13 +83,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         if(indexPath.section == 3){
             let index = detailItem?.collaborators.index(of: (ptp?.peerList[indexPath.row])!)
             if(index == nil){
-                detailItem?.addCollaborator(collab: (ptp?.peerList[indexPath.row])!)
+                var collab = ptp?.peerList[indexPath.row]
+                detailItem?.addCollaborator(collab: collab!)
                 tableView.reloadData()
-                
-                let messageDictionary: [String: String] = ["message": "Added you to collaborate!"]
-                
-                let dta = NSKeyedArchiver.archivedData(withRootObject: messageDictionary)
-                ptp?.send(data: dta)
+    
+                let encodedData = NSKeyedArchiver.archivedData(withRootObject: detailItem)
+                ptp?.send(data: encodedData, peers : [collab!])
             }
         }
     }

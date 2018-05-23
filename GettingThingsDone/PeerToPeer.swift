@@ -10,16 +10,16 @@ import Foundation
 import MultipeerConnectivity
 
 protocol PeerToPeerDelegate : AnyObject {
-    func manager(_ manager : PeerToPeer, didReceive data: Data)
+    func ptpmanager(_ manager : PeerToPeer, didReceive data: Data)
 }
 
 class PeerToPeer : NSObject {
-    static var serviceType = "todo-exchange"
+    static var serviceType = "todo-exchangex"
     var delegate : PeerToPeerDelegate?
     
     var peerList = [MCPeerID]()
     
-    private let peerId = MCPeerID(displayName: "Jannik S")
+    private let peerId = MCPeerID(displayName: "ICrashyoApp")
     private let serviceAdvertiser: MCNearbyServiceAdvertiser
     private let serviceBrowser: MCNearbyServiceBrowser
     
@@ -55,6 +55,16 @@ class PeerToPeer : NSObject {
         guard !session.connectedPeers.isEmpty else { return }
         do {
             try session.send(data, toPeers: session.connectedPeers, with: .reliable)
+        } catch {
+            print("Error sending \(data.count) bytes: \(error)")
+        }
+    }
+    
+    func send(data: Data, peers: [MCPeerID]) {
+        print("Sending data to Peer")
+        guard !session.connectedPeers.isEmpty else { return }
+        do {
+            try session.send(data, toPeers: peers, with: .reliable)
         } catch {
             print("Error sending \(data.count) bytes: \(error)")
         }
@@ -102,7 +112,8 @@ extension PeerToPeer: MCSessionDelegate {
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         print("didReceiveData: \(data)")
         DispatchQueue.main.async {
-            self.delegate?.manager(self, didReceive: data)
+            print("Calling dispatch")
+            self.delegate?.ptpmanager(self, didReceive: data)
         }
     }
     

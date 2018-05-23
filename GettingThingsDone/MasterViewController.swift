@@ -13,16 +13,25 @@ var sectionTitles = ["YET TO DO", "COMPLETED", "ICEBOX"]
 
 class MasterViewController: UITableViewController, PeerToPeerDelegate {
     
-    
-    func manager(_ manager: PeerToPeer, didReceive data: Data) {
-        print("Received data!")
+    func ptpmanager(_ manager: PeerToPeer, didReceive data: Data) {
+        print("Running manager..")
+        let item = (NSKeyedUnarchiver.unarchiveObject(with: data) as? ToDoItem)!
+        print("New item receive! \(item.id!)")
+        
+        let index = objects.index(where: { (item) -> Bool in
+            item.id == item.id! //
+        })
+        if(index != nil){
+            print("Object already exist")
+        } else {
+            objects[0].insert(item, at:0)
+            tableView.reloadData()
+        }
     }
-    
 
+    var ptp : PeerToPeer?
     var detailViewController: DetailViewController? = nil
     var objects = sectionTitles.map({_ in return [Any]()})
-    
-    var ptp : PeerToPeer?
     
     
     override func viewDidLoad() {
@@ -37,7 +46,10 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
         
+        
         ptp = PeerToPeer()
+        ptp?.delegate = self
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -53,7 +65,7 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
 
     @objc
     func insertNewObject(_ sender: Any) {
-        objects[0].insert(ToDoItem(title: "To Do Item \(objects[0].count+1)"), at: 0)
+        objects[0].insert(ToDoItem(title: "To Do Item \(objects[0].count+1)", id: NSUUID().uuidString), at: 0)
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
     }

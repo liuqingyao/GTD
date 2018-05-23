@@ -12,17 +12,34 @@ import MultipeerConnectivity
 /**
  To Do item Class to store information about a ToDoItem (title and historyArray)
  */
-@objcMembers class ToDoItem : NSObject {
+@objcMembers class ToDoItem : NSObject, NSCoding {
     
-    dynamic var title : String
-    dynamic var history : Array<historyItem>
-    dynamic var collaborators : Array<MCPeerID>
+    dynamic var id : String!
+    dynamic var title : String!
+    dynamic var history = [historyItem]()
+    dynamic var collaborators = [MCPeerID]()
     
-    init(title : String){
+    init(title : String, id: String){
+        self.id = id
         self.title = title
         self.history = []
         self.collaborators = []
         history.append(historyItem(creation: Date(), descr: "Added Item", canEdit: false))
+    }
+    
+    required convenience init(coder decoder: NSCoder){
+        let title = decoder.decodeObject(forKey: "title") as! String
+        let id = decoder.decodeObject(forKey: "id") as! String
+        self.init(title : title, id: id)
+        self.history = decoder.decodeObject(forKey: "history") as! Array<historyItem>
+        self.collaborators = decoder.decodeObject(forKey: "collaborators") as! Array<MCPeerID>
+    }
+    
+    func encode(with coder: NSCoder){
+        coder.encode(title, forKey: "title")
+        coder.encode(history, forKey: "history")
+        coder.encode(collaborators, forKey:"collaborators")
+        coder.encode(id, forKey: "id")
     }
 }
 
