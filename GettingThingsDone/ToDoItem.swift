@@ -71,13 +71,12 @@ extension ToDoItem {
         collaborators.append(collab)
     }
     
-    public func removeCollaborator(collab : MCPeerID) -> Bool{
+    public func removeCollaborator(collab : MCPeerID){
         
         if let index = self.collaborators.index(of: collab){
             self.collaborators.remove(at: index)
-            history
+            history.insert(historyItem(creation: Date(), descr: "Removed collaborator: \(collab.displayName)", canEdit: false), at: 0)
         }
-        return true
     }
     
 }

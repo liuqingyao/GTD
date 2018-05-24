@@ -112,16 +112,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         func catchNotification(notification:Notification){
             print("Lost peer - reloading peer section. Count:")
             print(self.ptp!.peerList.count)
-            
-            print(notification.userInfo!)
             var userinfo = notification.userInfo!["peer"] as! MCPeerID
-            print(detailItem?.collaborators)
             //remove peer from todoitem
-            if let index = detailItem?.collaborators.index(of: userinfo){
-                detailItem?.collaborators.remove(at: index)
-                print("Removed lost peer from Detailitem")
-            }
-            
+            detailItem?.removeCollaborator(collab: userinfo)
             self.historyTableView.reloadData()
         }
         
