@@ -108,20 +108,23 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             print(self.ptp!.peerList.count)
             self.historyTableView.reloadData()
         }
-        center.addObserver(forName: NSNotification.Name(rawValue: "LostPeer"), object: MCPeerID(), queue: nil){_ in
+        
+        func catchNotification(notification:Notification){
             print("Lost peer - reloading peer section. Count:")
             print(self.ptp!.peerList.count)
             
+            print(notification.userInfo!)
             //remove peer from todoitem
-            if let oj = object {
-                if let index = detailItem?.collaborators.index(oj){
-                    detailItem?.collaborators.remove(at: index)
-                    print("Removed lost peer from Detailitem")
-                }
-            }
+            //if let index = detailItem?.collaborators.index(oj){
+            //    detailItem?.collaborators.remove(at: index)
+            //    print("Removed lost peer from Detailitem")
+            //}
             
             self.historyTableView.reloadData()
         }
+        
+        center.addObserver(forName: NSNotification.Name(rawValue: "LostPeer"), object: nil, queue: nil, using: catchNotification)
+        
     }
 
     override func didReceiveMemoryWarning() {
