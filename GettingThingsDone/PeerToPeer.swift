@@ -104,7 +104,7 @@ extension PeerToPeer: MCNearbyServiceBrowserDelegate {
             print("Removed lost peer from peer list")
         }
         let center = NotificationCenter.default
-        center.post(name: NSNotification.Name(rawValue: "LostPeer"), object: nil, userInfo : ["Peerid" : peerID.id])
+        center.post(name: NSNotification.Name(rawValue: "LostPeer"), object: nil, userInfo : ["peer" : peerID])
     }
 }
 

@@ -114,11 +114,13 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             print(self.ptp!.peerList.count)
             
             print(notification.userInfo!)
+            var userinfo = notification.userInfo!["peer"] as! MCPeerID
+            print(detailItem?.collaborators)
             //remove peer from todoitem
-            //if let index = detailItem?.collaborators.index(oj){
-            //    detailItem?.collaborators.remove(at: index)
-            //    print("Removed lost peer from Detailitem")
-            //}
+            if let index = detailItem?.collaborators.index(of: userinfo){
+                detailItem?.collaborators.remove(at: index)
+                print("Removed lost peer from Detailitem")
+            }
             
             self.historyTableView.reloadData()
         }
