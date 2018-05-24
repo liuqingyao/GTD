@@ -71,6 +71,15 @@ extension ToDoItem {
         collaborators.append(collab)
     }
     
+    public func removeCollaborator(collab : MCPeerID) -> Bool{
+        
+        if let index = self.collaborators.index(of: collab){
+            self.collaborators.remove(at: index)
+            history
+        }
+        return true
+    }
+    
 }
 
 
