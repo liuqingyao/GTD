@@ -12,12 +12,12 @@ import MultipeerConnectivity
 /**
  To Do item Class to store information about a ToDoItem (title and historyArray)
  */
-@objcMembers class ToDoItem : NSObject, NSCoding {
+@objc class ToDoItem : NSObject, NSCoding {
     
-    dynamic var id : String!
-    dynamic var title : String!
-    dynamic var history = [historyItem]()
-    dynamic var collaborators = [MCPeerID]()
+    @objc dynamic var id : String!
+    @objc dynamic var title : String!
+    @objc dynamic var history = [historyItem]()
+    @objc dynamic var collaborators = [MCPeerID]()
     
     init(title : String, id: String){
         self.id = id

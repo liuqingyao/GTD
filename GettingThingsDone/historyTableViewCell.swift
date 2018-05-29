@@ -16,9 +16,14 @@ class historyTableViewCell : UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var dateField: UILabel!
     @IBOutlet weak var descriptionField: UITextField!
     
+    var observation : NSKeyValueObservation?
+    
     var object : historyItem? {
         didSet {
             configure(obj : object!)
+            observation = object?.observe(\.descr){_, _ in
+                self.descriptionField.text = self.object?.descr
+            }
         }
     }
 

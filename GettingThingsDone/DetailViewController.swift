@@ -23,6 +23,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         let newItem = historyItem(creation: Date(), descr: "New Event", canEdit: true)
         detailItem?.history.insert(newItem, at:0)
         historyTableView.reloadData()
+        
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: detailItem)
+        ptp?.send(data: encodedData, peers : detailItem!.collaborators)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -61,6 +64,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
                 cell.object = detailItem
+                cell.ptp = ptp
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! historyTableViewCell
@@ -94,7 +98,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -121,12 +124,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         center.addObserver(forName: NSNotification.Name(rawValue: "LostPeer"), object: nil, queue: nil, using: catchNotification)
         
     }
+    
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     var detailItem: ToDoItem? {
         didSet {
         }

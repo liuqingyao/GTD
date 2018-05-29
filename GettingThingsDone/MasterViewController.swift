@@ -28,7 +28,8 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
         
         if let index = idx{
             print("Updating object \(item.id)")
-            objects[index.section][index.row] = item
+            objects[index.section][index.row].title = item.title
+            objects[index.section][index.row].history = item.history
         } else {
             print("New item received and added with id: \(item.id!)")
             objects[0].insert(item, at:0)
@@ -107,11 +108,18 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
         return objects[section].count
     }
 
+    var observations : NSKeyValueObservation?
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         let object = objects[indexPath.section][indexPath.row] as! ToDoItem
         cell.textLabel!.text = object.title
+        
+        observations = object.observe(\.title){_, _ in
+            print("Change seen")
+            tableView.reloadData()
+        }
+        
         return cell
     }
 
