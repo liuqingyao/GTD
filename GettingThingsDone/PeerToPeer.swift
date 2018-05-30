@@ -19,7 +19,7 @@ class PeerToPeer : NSObject {
     
     var peerList = [MCPeerID]()
     
-    private let peerId = MCPeerID(displayName: "ICrashyoApp")
+    let peerId = MCPeerID(displayName: "ICrashyoApp")
     private let serviceAdvertiser: MCNearbyServiceAdvertiser
     private let serviceBrowser: MCNearbyServiceBrowser
     
@@ -64,10 +64,16 @@ class PeerToPeer : NSObject {
     }
     
     func send(data: Data, peers: [MCPeerID]) {
-        print("Sending data to Peer")
+        print("Sending data to Peer \(peers)")
         guard !session.connectedPeers.isEmpty else { return }
         do {
-            try session.send(data, toPeers: peers, with: .reliable)
+            var peerc = peers
+            //Remove own peer id from peers
+            let i = peerc.index(of: peerId)
+            if(i != nil){
+                peerc.remove(at: i!)
+            }
+            try session.send(data, toPeers: peerc, with: .reliable)
         } catch {
             print("Error sending \(data.count) bytes: \(error)")
         }

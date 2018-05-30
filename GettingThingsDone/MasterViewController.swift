@@ -29,6 +29,18 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
         if let index = idx{
             print("Updating object \(item.id)")
             objects[index.section][index.row].title = item.title
+            for o in 0..<item.history.count {
+                if(objects[index.section][index.row].history[o].creation == item.history[o].creation){
+                    //Items are equal, only update descr
+                    print("updating history (from to)")
+                    print(objects[index.section][index.row].history[o].descr)
+                    print(item.history[o].descr)
+                    objects[index.section][index.row].history[o].descr = item.history[o].descr
+                } else {
+                    //New item, append array
+                    objects[index.section][index.row].history.insert(item.history[o], at: 0)
+                }
+            }
             objects[index.section][index.row].history = item.history
         } else {
             print("New item received and added with id: \(item.id!)")
@@ -74,7 +86,10 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
 
     @objc
     func insertNewObject(_ sender: Any) {
-        objects[0].insert(ToDoItem(title: "To Do Item \(objects[0].count+1)", id: NSUUID().uuidString), at: 0)
+        let item = ToDoItem(title: "To Do Item \(objects[0].count+1)", id: NSUUID().uuidString)
+        //Add creator peer id to collaborators
+        item.collaborators.append((ptp?.peerId)!)
+        objects[0].insert(item, at: 0)
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
     }

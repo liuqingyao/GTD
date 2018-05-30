@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 /**
  Custom historyTableView cell to display the date and description of a history Item
@@ -16,12 +17,15 @@ class historyTableViewCell : UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var dateField: UILabel!
     @IBOutlet weak var descriptionField: UITextField!
     
+    var toDoItem : ToDoItem?
+    
     var observation : NSKeyValueObservation?
     
     var object : historyItem? {
         didSet {
             configure(obj : object!)
             observation = object?.observe(\.descr){_, _ in
+                print("Change seen!")
                 self.descriptionField.text = self.object?.descr
             }
         }
@@ -36,6 +40,10 @@ class historyTableViewCell : UITableViewCell, UITextFieldDelegate {
         if let inText = textField.text {
             if let oj = object {
                 oj.descr = inText
+                
+                print("Sending history update")
+                let encodedData = NSKeyedArchiver.archivedData(withRootObject: oj)
+                ptp?.send(data: encodedData, peers : (toDoItem?.collaborators)!)
             }
         }
         textField.resignFirstResponder()
@@ -61,4 +69,6 @@ class historyTableViewCell : UITableViewCell, UITextFieldDelegate {
         
         descriptionField.delegate = self
     }
+    
+    var ptp : PeerToPeer?
 }

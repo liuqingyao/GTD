@@ -68,12 +68,16 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! historyTableViewCell
-                let obj = detailItem!.history[indexPath.row] as historyItem
-                cell.object = obj
+                cell.object = detailItem?.history[indexPath.row] as! historyItem
+                cell.toDoItem = detailItem
                 return cell
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "collabCell", for: indexPath)
-                cell.textLabel!.text = detailItem!.collaborators[indexPath.row].displayName
+                if(detailItem!.collaborators[indexPath.row] != ptp?.peerId){
+                    cell.textLabel!.text = detailItem!.collaborators[indexPath.row].displayName
+                } else {
+                    cell.textLabel!.text = "You"
+                }
                 return cell
             case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "collabCell", for: indexPath)
@@ -90,6 +94,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             if(index == nil){
                 let collab = ptp?.peerList[indexPath.row]
                 detailItem?.addCollaborator(collab: collab!)
+                
+                //Change text color
                 tableView.reloadData()
     
                 let encodedData = NSKeyedArchiver.archivedData(withRootObject: detailItem)
@@ -121,7 +127,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             self.historyTableView.reloadData()
         }
         
-        center.addObserver(forName: NSNotification.Name(rawValue: "LostPeer"), object: nil, queue: nil, using: catchNotification)
+        center.addObserver(forName: NSNotification.Name(rawValue: "LostPeer"), object: nil, queue: nil, using: catchNotification) 
+        
         
     }
     
