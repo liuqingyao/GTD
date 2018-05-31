@@ -35,8 +35,6 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
         if var index = idx{
             //Check if Indexpath has changed
             if(index.section != item.index.section){
-                print("Old index path: \(index)")
-                print("New index path: \(item.index)")
                 //remove old item
                 objects[index.section].remove(at: index.row)
                 objects[item.index.section].insert(item, at: 0)
@@ -56,13 +54,11 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
                 //If item already exist, update properties
                 if(objects[index.section][index.row].history[o].id == item.history[o].id){
                     //Items are equal, only update descr
-                    print("updating history (from to)")
                     print(objects[index.section][index.row].history[o].descr)
                     print(item.history[o].descr)
                     objects[index.section][index.row].history[o].descr = item.history[o].descr
                 } else {
                     //If Item does not exist it will be added to array
-                    print("Adding new history Item")
                     objects[index.section][index.row].history.insert(item.history[o], at: 0)
                     
                     //Notification Post to update Detail Views
@@ -135,7 +131,7 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let object = objects[indexPath.section][indexPath.row]
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object as? ToDoItem
+                controller.detailItem = object
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
                 controller.ptp = self.ptp
@@ -161,7 +157,7 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        let object = objects[indexPath.section][indexPath.row] as! ToDoItem
+        let object = objects[indexPath.section][indexPath.row] 
         cell.textLabel!.text = object.title
         
         //Key Value observation for title change

@@ -65,7 +65,7 @@ extension ToDoItem {
      */
     public func changeTitle(nTitle : String) {
         if(nTitle != self.title){
-            history.insert(historyItem(creation: Date(), descr: "Changed Item name from \(self.title) to \(nTitle)", canEdit: false, id: NSUUID().uuidString), at: 0)
+            history.insert(historyItem(creation: Date(), descr: "Changed Item name from \(self.title!) to \(nTitle)", canEdit: false, id: NSUUID().uuidString), at: 0)
             self.title = nTitle
         }
     }

@@ -26,7 +26,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         historyTableView.reloadData()
         
         //Send new historyitem to peers
-        let encodedData = NSKeyedArchiver.archivedData(withRootObject: detailItem)
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: detailItem!)
         ptp?.send(data: encodedData, peers : detailItem!.collaborators)
     }
     
@@ -40,7 +40,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //Section switch statement, which returns the number of rows per section
-        if let dt = detailItem {
+        if detailItem != nil {
             switch section{
                 case 0:
                     return 1
@@ -110,7 +110,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 tableView.reloadData()
     
                 //Send ToDoItem to collaborator
-                let encodedData = NSKeyedArchiver.archivedData(withRootObject: detailItem)
+                let encodedData = NSKeyedArchiver.archivedData(withRootObject: detailItem!)
                 ptp?.send(data: encodedData, peers : [collab!])
             }
         }

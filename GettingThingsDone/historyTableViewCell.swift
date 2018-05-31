@@ -41,7 +41,7 @@ class historyTableViewCell : UITableViewCell, UITextFieldDelegate {
                 oj.descr = inText
                 
                 //When history Text is changed updated todoitem is sent to collaborators 
-                let encodedData = NSKeyedArchiver.archivedData(withRootObject: toDoItem as! ToDoItem)
+                let encodedData = NSKeyedArchiver.archivedData(withRootObject: toDoItem!)
                 ptp?.send(data: encodedData, peers : (toDoItem?.collaborators)!)
             }
         }
