@@ -40,17 +40,23 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //Section switch statement, which returns the number of rows per section
-        switch section{
-            case 0:
-                return 1
-            case 1:
-                return (detailItem?.history.count)!
-            case 2:
-                return (detailItem?.collaborators.count)!
-            case 3:
-                return ptp!.peerList.count
-            default:
-                fatalError("Out of section bound")
+        if let dt = detailItem {
+            switch section{
+                case 0:
+                    return 1
+                case 1:
+                    return (detailItem?.history.count)!
+                case 2:
+                    return (detailItem?.collaborators.count)!
+                case 3:
+                    if let p = ptp {
+                        return p.peerList.count
+                    } else { return 0}
+                default:
+                    fatalError("Out of section bound")
+            }
+        } else {
+            return 0
         }
     }
     
@@ -116,40 +122,42 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         historyTableView.delegate = self
         historyTableView.dataSource = self
         
-        //Notification Center
-        let center = NotificationCenter.default
-        //Observer when new peer joins
-        center.addObserver(forName: NSNotification.Name(rawValue: "NewPeer"), object: nil, queue: nil){_ in
-            print("New peer - reloading peer section. Count:")
-            print(self.ptp!.peerList.count)
-            self.historyTableView.reloadData()
-        }
-        
-        //Observer method to act when peer is lost - updates peer section
-        func catchNotification(notification:Notification){
-            print("Lost peer - reloading peer section. Count:")
-            print(self.ptp!.peerList.count)
-            let userinfo = notification.userInfo!["peer"] as! MCPeerID
-            //remove peer from todoitem
-            detailItem?.removeCollaborator(collab: userinfo)
-            self.historyTableView.reloadData()
-        }
-        
-        //Observer to see when peer is lost
-        center.addObserver(forName: NSNotification.Name(rawValue: "LostPeer"), object: nil, queue: nil, using: catchNotification)
-        
-        //Observer method to act when new history Item is added
-        func checkHistoryItem(notification:Notification){
-            let dataid = notification.userInfo!["id"] as! String
-            //Check if new history Item is added to this to do item
-            if(detailItem?.id == dataid){
-                print("New History Item received!")
+        if let dt = detailItem {
+            //Notification Center
+            let center = NotificationCenter.default
+            //Observer when new peer joins
+            center.addObserver(forName: NSNotification.Name(rawValue: "NewPeer"), object: nil, queue: nil){_ in
+                print("New peer - reloading peer section. Count:")
+                print(self.ptp!.peerList.count)
                 self.historyTableView.reloadData()
             }
+            
+            //Observer method to act when peer is lost - updates peer section
+            func catchNotification(notification:Notification){
+                print("Lost peer - reloading peer section. Count:")
+                print(self.ptp!.peerList.count)
+                let userinfo = notification.userInfo!["peer"] as! MCPeerID
+                //remove peer from todoitem
+                detailItem?.removeCollaborator(collab: userinfo)
+                self.historyTableView.reloadData()
+            }
+            
+            //Observer to see when peer is lost
+            center.addObserver(forName: NSNotification.Name(rawValue: "LostPeer"), object: nil, queue: nil, using: catchNotification)
+            
+            //Observer method to act when new history Item is added
+            func checkHistoryItem(notification:Notification){
+                let dataid = notification.userInfo!["id"] as! String
+                //Check if new history Item is added to this to do item
+                if(detailItem?.id == dataid){
+                    print("New History Item received!")
+                    self.historyTableView.reloadData()
+                }
+            }
+            
+            //Adding observer for new history items
+            center.addObserver(forName: NSNotification.Name(rawValue: "newHistoryItem"), object: nil, queue: nil, using: checkHistoryItem)
         }
-        
-        //Adding observer for new history items 
-        center.addObserver(forName: NSNotification.Name(rawValue: "newHistoryItem"), object: nil, queue: nil, using: checkHistoryItem)
         
     }
     

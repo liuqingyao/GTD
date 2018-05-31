@@ -1,0 +1,19 @@
+UI Tests:
+
+-Start the app on two Iphones, e.g. iphone 8 and ipone 6
+-Create new ToDoItem
+-Add Collaborator
+-Open Detail View on both devices
+-Change title
+-Close Detail View on one device
+-Change title
+-Open detail view on both devices
+-Add new history Item
+-Change title of history item
+-Open Master view on both devices
+-Move Item in sections
+-Open Detail View on one device
+-Delete item on once device
+-Add a new item and collaborator
+-Close App on one device
+

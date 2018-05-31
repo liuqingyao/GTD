@@ -17,6 +17,7 @@
 		84057DBE2095953E00025048 /* GettingThingsDoneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84057DBD2095953E00025048 /* GettingThingsDoneUITests.swift */; };
 		84057DCC209597E700025048 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84057DCB209597E700025048 /* ToDoItem.swift */; };
 		841EEA6720A1AFAA00D1A295 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EEA6620A1AFAA00D1A295 /* TaskCell.swift */; };
+		84402EEB20C00828002A7851 /* UITestExplanation.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84402EEA20C00828002A7851 /* UITestExplanation.txt */; };
 		84691A6120A156C700282A17 /* historyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84691A6020A156C700282A17 /* historyItem.swift */; };
 		84691A6320A1621300282A17 /* historyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84691A6220A1621300282A17 /* historyTableViewCell.swift */; };
 		84D474F820B3DCF600AE2F44 /* PeerToPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D474F720B3DCF600AE2F44 /* PeerToPeer.swift */; };
@@ -63,6 +64,7 @@
 		84057DBF2095953E00025048 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84057DCB209597E700025048 /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		841EEA6620A1AFAA00D1A295 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		84402EEA20C00828002A7851 /* UITestExplanation.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = UITestExplanation.txt; sourceTree = "<group>"; };
 		8459E93620A2BAD300BA1E3C /* GettingThingsDoneTestsa.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GettingThingsDoneTestsa.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84691A6020A156C700282A17 /* historyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = historyItem.swift; sourceTree = "<group>"; };
 		84691A6220A1621300282A17 /* historyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = historyTableViewCell.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				84057DCB209597E700025048 /* ToDoItem.swift */,
 				84691A6220A1621300282A17 /* historyTableViewCell.swift */,
 				84D474F720B3DCF600AE2F44 /* PeerToPeer.swift */,
+				84402EEA20C00828002A7851 /* UITestExplanation.txt */,
 			);
 			path = GettingThingsDone;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84402EEB20C00828002A7851 /* UITestExplanation.txt in Resources */,
 				84057DA82095953E00025048 /* LaunchScreen.storyboard in Resources */,
 				84057DA52095953E00025048 /* Assets.xcassets in Resources */,
 				84057DA32095953E00025048 /* Main.storyboard in Resources */,
