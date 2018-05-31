@@ -14,12 +14,12 @@ protocol PeerToPeerDelegate : AnyObject {
 }
 
 class PeerToPeer : NSObject {
-    static var serviceType = "todo-exchangex"
+    static var serviceType = "todo-exchange"
     var delegate : PeerToPeerDelegate?
     
     var peerList = [MCPeerID]()
     
-    let peerId = MCPeerID(displayName: "ICrashyoApp")
+    let peerId = MCPeerID(displayName: "Jannik")
     private let serviceAdvertiser: MCNearbyServiceAdvertiser
     private let serviceBrowser: MCNearbyServiceBrowser
     
@@ -53,21 +53,14 @@ class PeerToPeer : NSObject {
         let center = NotificationCenter.default
         center.post(name: NSNotification.Name(rawValue: "NewPeer"), object: nil)
     }
-    
-    func send(data: Data) {
-        guard !session.connectedPeers.isEmpty else { return }
-        do {
-            try session.send(data, toPeers: session.connectedPeers, with: .reliable)
-        } catch {
-            print("Error sending \(data.count) bytes: \(error)")
-        }
-    }
+  
     
     func send(data: Data, peers: [MCPeerID]) {
-        print("Sending data to Peer \(peers)")
+        print("Sending data to peers")
         guard !session.connectedPeers.isEmpty else { return }
         do {
             var peerc = peers
+            print(peerc)
             //Remove own peer id from peers
             let i = peerc.index(of: peerId)
             if(i != nil){

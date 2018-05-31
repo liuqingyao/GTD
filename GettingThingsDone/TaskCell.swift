@@ -18,14 +18,17 @@ class TaskCell : UITableViewCell, UITextFieldDelegate {
     
     var observation : NSKeyValueObservation?
     
+    /**
+     Setting the objects properties
+     */
     var object : ToDoItem? {
         didSet{
             taskField.text = object?.title
             taskField.becomeFirstResponder()
             taskField.delegate = self
             
+            //Adding Key Value observer to update title
             observation = object!.observe(\.title){_, _ in
-                print("Title change!")
                 self.taskField.text = self.object!.title
             }
         }
@@ -42,7 +45,7 @@ class TaskCell : UITableViewCell, UITextFieldDelegate {
             if let oj = object {
                 oj.changeTitle(nTitle: inText)
                 
-                print(oj.collaborators)
+                //Sending toDoItem Object to peers on update
                 let encodedData = NSKeyedArchiver.archivedData(withRootObject: oj)
                 ptp?.send(data: encodedData, peers : oj.collaborators)
             }
@@ -51,6 +54,7 @@ class TaskCell : UITableViewCell, UITextFieldDelegate {
         return true
     }
     
+    //PeerToPeer Object 
     var ptp : PeerToPeer?
 
 }

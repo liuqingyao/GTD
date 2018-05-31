@@ -24,8 +24,8 @@ class historyTableViewCell : UITableViewCell, UITextFieldDelegate {
     var object : historyItem? {
         didSet {
             configure(obj : object!)
+            //Key value observation to change description text when data changes
             observation = object?.observe(\.descr){_, _ in
-                print("Change seen!")
                 self.descriptionField.text = self.object?.descr
             }
         }
@@ -36,13 +36,12 @@ class historyTableViewCell : UITableViewCell, UITextFieldDelegate {
      - returns: Boolean
      */
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("Should Return")
         if let inText = textField.text {
             if let oj = object {
                 oj.descr = inText
                 
-                print("Sending history update")
-                let encodedData = NSKeyedArchiver.archivedData(withRootObject: oj)
+                //When history Text is changed updated todoitem is sent to collaborators 
+                let encodedData = NSKeyedArchiver.archivedData(withRootObject: toDoItem as! ToDoItem)
                 ptp?.send(data: encodedData, peers : (toDoItem?.collaborators)!)
             }
         }

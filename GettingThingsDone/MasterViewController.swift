@@ -13,11 +13,16 @@ var sectionTitles = ["YET TO DO", "COMPLETED", "ICEBOX"]
 
 class MasterViewController: UITableViewController, PeerToPeerDelegate {
     
+    
+    //Peer To Peer Manager
     func ptpmanager(_ manager: PeerToPeer, didReceive data: Data) {
-        print("Running manager..")
+        print("Manager called")
+        //Received Item
         let item = (NSKeyedUnarchiver.unarchiveObject(with: data) as? ToDoItem)!
+        
         var idx : IndexPath?
         
+        //Checking if object already exists in objects array and saving indexpath to idx
         for s in 0..<objects.count{
             for r in 0..<objects[s].count{
                 if(objects[s][r].id == item.id){
@@ -26,25 +31,49 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
             }
         }
         
-        if let index = idx{
-            print("Updating object \(item.id)")
+        
+        if var index = idx{
+            //Check if Indexpath has changed
+            if(index.section != item.index.section){
+                print("Old index path: \(index)")
+                print("New index path: \(item.index)")
+                //remove old item
+                objects[index.section].remove(at: index.row)
+                objects[item.index.section].insert(item, at: 0)
+                tableView.reloadData()
+                
+                //overwrite index
+                index = IndexPath(row: 0, section: item.index.section)
+            }
+            
+            //Updating object title
             objects[index.section][index.row].title = item.title
+            //Updating collaborators list
+            objects[index.section][index.row].collaborators = item.collaborators
+            
+            //History Item update
             for o in 0..<item.history.count {
-                if(objects[index.section][index.row].history[o].creation == item.history[o].creation){
+                //If item already exist, update properties
+                if(objects[index.section][index.row].history[o].id == item.history[o].id){
                     //Items are equal, only update descr
                     print("updating history (from to)")
                     print(objects[index.section][index.row].history[o].descr)
                     print(item.history[o].descr)
                     objects[index.section][index.row].history[o].descr = item.history[o].descr
                 } else {
-                    //New item, append array
+                    //If Item does not exist it will be added to array
+                    print("Adding new history Item")
                     objects[index.section][index.row].history.insert(item.history[o], at: 0)
+                    
+                    //Notification Post to update Detail Views
+                    let center = NotificationCenter.default
+                    center.post(name: NSNotification.Name(rawValue: "newHistoryItem"), object: nil, userInfo : ["id" : objects[index.section][index.row].id])
                 }
             }
-            objects[index.section][index.row].history = item.history
         } else {
+            //If indexpath does not exist new Item will be added to objects array depending on section
             print("New item received and added with id: \(item.id!)")
-            objects[0].insert(item, at:0)
+            objects[item.index.section].insert(item, at:0)
             tableView.reloadData()
         }
         
@@ -86,10 +115,15 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
 
     @objc
     func insertNewObject(_ sender: Any) {
-        let item = ToDoItem(title: "To Do Item \(objects[0].count+1)", id: NSUUID().uuidString)
+        //Setting index for item
+        let index = IndexPath(row: 0, section: 0)
+        //New ToDoItem
+        let item = ToDoItem(title: "To Do Item \(objects[0].count+1)", id: NSUUID().uuidString, idx : index)
         //Add creator peer id to collaborators
         item.collaborators.append((ptp?.peerId)!)
         objects[0].insert(item, at: 0)
+        
+        //Insert new item into tableview
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
     }
@@ -130,6 +164,7 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
         let object = objects[indexPath.section][indexPath.row] as! ToDoItem
         cell.textLabel!.text = object.title
         
+        //Key Value observation for title change
         observations = object.observe(\.title){_, _ in
             print("Change seen")
             tableView.reloadData()
@@ -145,7 +180,17 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            objects.remove(at: indexPath.row)
+            //Remove device id from collaborators
+            let object = objects[indexPath.section][indexPath.row]
+            print(object.collaborators)
+            object.removeCollaborator(collab: (ptp?.peerId)!)
+            
+            //sending updated item to collaborators
+            let encodedData = NSKeyedArchiver.archivedData(withRootObject: object )
+            print(object.collaborators)
+            ptp?.send(data: encodedData, peers : object.collaborators)
+            
+            objects[indexPath.section].remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
@@ -157,13 +202,17 @@ class MasterViewController: UITableViewController, PeerToPeerDelegate {
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        objects[destinationIndexPath.section].insert(objects[sourceIndexPath.section][sourceIndexPath.row], at: destinationIndexPath.row)
+    objects[destinationIndexPath.section].insert(objects[sourceIndexPath.section][sourceIndexPath.row], at: destinationIndexPath.row)
         objects[sourceIndexPath.section].remove(at: sourceIndexPath.row)
         
         //save change
-        let obj = objects[destinationIndexPath.section][destinationIndexPath.row] as! ToDoItem
+        let obj = objects[destinationIndexPath.section][destinationIndexPath.row]
         if(destinationIndexPath.section != sourceIndexPath.section){
             obj.addMoveEvent(section : sectionTitles[destinationIndexPath.section])
+            obj.index = destinationIndexPath
+            //Sending changed indexpath to peers
+            let encodedData = NSKeyedArchiver.archivedData(withRootObject: obj )
+            ptp?.send(data: encodedData, peers : obj.collaborators)
         }
         
     }

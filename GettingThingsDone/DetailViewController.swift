@@ -9,7 +9,8 @@
 import UIKit
 import MultipeerConnectivity
 
-class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+
     
     var sectionTitles = ["Task", "History", "Collaborators", "Peers"]
     
@@ -20,10 +21,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     */
     @IBAction func addButton(_ sender: Any) {
         print("Add Button pressed")
-        let newItem = historyItem(creation: Date(), descr: "New Event", canEdit: true)
+        let newItem = historyItem(creation: Date(), descr: "New Event", canEdit: true, id: NSUUID().uuidString)
         detailItem?.history.insert(newItem, at:0)
         historyTableView.reloadData()
         
+        //Send new historyitem to peers
         let encodedData = NSKeyedArchiver.archivedData(withRootObject: detailItem)
         ptp?.send(data: encodedData, peers : detailItem!.collaborators)
     }
@@ -68,7 +70,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! historyTableViewCell
-                cell.object = detailItem?.history[indexPath.row] as! historyItem
+                cell.object = detailItem?.history[indexPath.row]
+                cell.ptp = ptp
                 cell.toDoItem = detailItem
                 return cell
             case 2:
@@ -88,16 +91,19 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+    //Row selection to select new collaborators
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(indexPath.section == 3){
+            //Check if selected user is already a collaborator
             let index = detailItem?.collaborators.index(of: (ptp?.peerList[indexPath.row])!)
             if(index == nil){
+                //Adding new collaborator
                 let collab = ptp?.peerList[indexPath.row]
                 detailItem?.addCollaborator(collab: collab!)
-                
-                //Change text color
+ 
                 tableView.reloadData()
     
+                //Send ToDoItem to collaborator
                 let encodedData = NSKeyedArchiver.archivedData(withRootObject: detailItem)
                 ptp?.send(data: encodedData, peers : [collab!])
             }
@@ -112,23 +118,38 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         //Notification Center
         let center = NotificationCenter.default
+        //Observer when new peer joins
         center.addObserver(forName: NSNotification.Name(rawValue: "NewPeer"), object: nil, queue: nil){_ in
             print("New peer - reloading peer section. Count:")
             print(self.ptp!.peerList.count)
             self.historyTableView.reloadData()
         }
         
+        //Observer method to act when peer is lost - updates peer section
         func catchNotification(notification:Notification){
             print("Lost peer - reloading peer section. Count:")
             print(self.ptp!.peerList.count)
-            var userinfo = notification.userInfo!["peer"] as! MCPeerID
+            let userinfo = notification.userInfo!["peer"] as! MCPeerID
             //remove peer from todoitem
             detailItem?.removeCollaborator(collab: userinfo)
             self.historyTableView.reloadData()
         }
         
-        center.addObserver(forName: NSNotification.Name(rawValue: "LostPeer"), object: nil, queue: nil, using: catchNotification) 
+        //Observer to see when peer is lost
+        center.addObserver(forName: NSNotification.Name(rawValue: "LostPeer"), object: nil, queue: nil, using: catchNotification)
         
+        //Observer method to act when new history Item is added
+        func checkHistoryItem(notification:Notification){
+            let dataid = notification.userInfo!["id"] as! String
+            //Check if new history Item is added to this to do item
+            if(detailItem?.id == dataid){
+                print("New History Item received!")
+                self.historyTableView.reloadData()
+            }
+        }
+        
+        //Adding observer for new history items 
+        center.addObserver(forName: NSNotification.Name(rawValue: "newHistoryItem"), object: nil, queue: nil, using: checkHistoryItem)
         
     }
     
